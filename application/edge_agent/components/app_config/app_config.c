@@ -33,6 +33,11 @@ typedef struct {
 #define APP_DEFAULT_FEISHU_APP_ID         ""
 #define APP_DEFAULT_FEISHU_APP_SECRET     ""
 #define APP_DEFAULT_TG_BOT_TOKEN          ""
+#define APP_DEFAULT_MQTT_BROKER_URL       ""
+#define APP_DEFAULT_MQTT_USERNAME         ""
+#define APP_DEFAULT_MQTT_PASSWORD         ""
+#define APP_DEFAULT_MQTT_DEVICE_ID        ""
+#define APP_DEFAULT_MQTT_TOPIC_PREFIX     "esp-claw"
 #define APP_DEFAULT_WECHAT_TOKEN          ""
 #define APP_DEFAULT_WECHAT_BASE_URL       "https://ilinkai.weixin.qq.com"
 #define APP_DEFAULT_WECHAT_CDN_BASE_URL   "https://novac2c.cdn.weixin.qq.com/c2c"
@@ -60,6 +65,11 @@ static const app_config_field_t s_fields[] = {
     APP_CONFIG_FIELD(feishu_app_id, "feishu_app_id", APP_DEFAULT_FEISHU_APP_ID),
     APP_CONFIG_FIELD(feishu_app_secret, "feishu_secret", APP_DEFAULT_FEISHU_APP_SECRET),
     APP_CONFIG_FIELD(tg_bot_token, "tg_bot_token", APP_DEFAULT_TG_BOT_TOKEN),
+    APP_CONFIG_FIELD(mqtt_broker_url, "mqtt_url", APP_DEFAULT_MQTT_BROKER_URL),
+    APP_CONFIG_FIELD(mqtt_username, "mqtt_user", APP_DEFAULT_MQTT_USERNAME),
+    APP_CONFIG_FIELD(mqtt_password, "mqtt_pass", APP_DEFAULT_MQTT_PASSWORD),
+    APP_CONFIG_FIELD(mqtt_device_id, "mqtt_devid", APP_DEFAULT_MQTT_DEVICE_ID),
+    APP_CONFIG_FIELD(mqtt_topic_prefix, "mqtt_prefix", APP_DEFAULT_MQTT_TOPIC_PREFIX),
     APP_CONFIG_FIELD(wechat_token, "wechat_token", APP_DEFAULT_WECHAT_TOKEN),
     APP_CONFIG_FIELD(wechat_base_url, "wechat_base_url", APP_DEFAULT_WECHAT_BASE_URL),
     APP_CONFIG_FIELD(wechat_cdn_base_url, "wechat_cdn_url", APP_DEFAULT_WECHAT_CDN_BASE_URL),
@@ -193,6 +203,11 @@ void app_config_to_claw(const app_config_t *config, app_claw_config_t *out)
     strlcpy(out->feishu_app_id, config->feishu_app_id, sizeof(out->feishu_app_id));
     strlcpy(out->feishu_app_secret, config->feishu_app_secret, sizeof(out->feishu_app_secret));
     strlcpy(out->tg_bot_token, config->tg_bot_token, sizeof(out->tg_bot_token));
+    strlcpy(out->mqtt_broker_url, config->mqtt_broker_url, sizeof(out->mqtt_broker_url));
+    strlcpy(out->mqtt_username, config->mqtt_username, sizeof(out->mqtt_username));
+    strlcpy(out->mqtt_password, config->mqtt_password, sizeof(out->mqtt_password));
+    strlcpy(out->mqtt_device_id, config->mqtt_device_id, sizeof(out->mqtt_device_id));
+    strlcpy(out->mqtt_topic_prefix, config->mqtt_topic_prefix, sizeof(out->mqtt_topic_prefix));
     strlcpy(out->wechat_token, config->wechat_token, sizeof(out->wechat_token));
     strlcpy(out->wechat_base_url, config->wechat_base_url, sizeof(out->wechat_base_url));
     strlcpy(out->wechat_cdn_base_url, config->wechat_cdn_base_url, sizeof(out->wechat_cdn_base_url));

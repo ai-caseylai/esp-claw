@@ -29,6 +29,11 @@ dependencies:
     rules:
       - if: $CONFIG{APP_CLAW_CAP_IM_WECHAT} == True
 
+  cap_im_mqtt:
+    path: ../../../components/claw_capabilities/cap_im_mqtt
+    rules:
+      - if: $CONFIG{APP_CLAW_CAP_IM_MQTT} == True
+
   captive_dns:
     path: ../../../components/common/captive_dns
 

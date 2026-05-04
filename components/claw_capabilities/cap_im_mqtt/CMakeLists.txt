@@ -1,0 +1,15 @@
+idf_component_register(
+    SRCS
+        "src/cap_im_mqtt.c"
+        "src/cmd_cap_im_mqtt.c"
+    INCLUDE_DIRS
+        "include"
+    REQUIRES
+        claw_cap
+        claw_event_router
+        mqtt
+        esp_timer
+        freertos
+        json
+        console
+)

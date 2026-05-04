@@ -24,6 +24,11 @@ dependencies:
       - if: $CONFIG{APP_CLAW_CAP_IM_TG} == True
     path: ../../claw_capabilities/cap_im_tg
 
+  cap_im_mqtt:
+    rules:
+      - if: $CONFIG{APP_CLAW_CAP_IM_MQTT} == True
+    path: ../../claw_capabilities/cap_im_mqtt
+
   cap_im_local:
     rules:
       - if: $CONFIG{APP_CLAW_CAP_IM_LOCAL} == True

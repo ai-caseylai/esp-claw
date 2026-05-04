@@ -20,6 +20,9 @@
 #if CONFIG_APP_CLAW_CAP_IM_TG
 #include "cmd_cap_im_tg.h"
 #endif
+#if CONFIG_APP_CLAW_CAP_IM_MQTT
+#include "cmd_cap_im_mqtt.h"
+#endif
 #if CONFIG_APP_CLAW_CAP_IM_WECHAT
 #include "cmd_cap_im_wechat.h"
 #endif
@@ -703,6 +706,9 @@ static void register_cap_cli_commands(void)
 #endif
 #if CONFIG_APP_CLAW_CAP_IM_TG
     register_cap_im_tg();
+#endif
+#if CONFIG_APP_CLAW_CAP_IM_MQTT
+    register_cap_im_mqtt();
 #endif
 #if CONFIG_APP_CLAW_CAP_IM_WECHAT
     register_cap_im_wechat();

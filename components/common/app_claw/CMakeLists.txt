@@ -38,6 +38,10 @@ if(CONFIG_APP_CLAW_CAP_IM_TG)
     list(APPEND app_claw_requires cap_im_tg)
 endif()
 
+if(CONFIG_APP_CLAW_CAP_IM_MQTT)
+    list(APPEND app_claw_requires cap_im_mqtt)
+endif()
+
 if(CONFIG_APP_CLAW_CAP_IM_WECHAT)
     list(APPEND app_claw_requires cap_im_wechat)
 endif()

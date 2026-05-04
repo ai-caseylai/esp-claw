@@ -11,6 +11,10 @@ if(CONFIG_APP_CLAW_CAP_IM_WECHAT)
     list(APPEND main_requires cap_im_wechat)
 endif()
 
+if(CONFIG_APP_CLAW_CAP_IM_MQTT)
+    list(APPEND main_requires cap_im_mqtt)
+endif()
+
 idf_component_register(
     SRCS
         "main.c"

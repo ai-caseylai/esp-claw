@@ -257,6 +257,10 @@ esp_err_t app_claw_start(const app_claw_config_t *config,
     ESP_RETURN_ON_ERROR(claw_event_router_register_outbound_binding("telegram", "tg_send_message"),
                         TAG, "Failed to bind Telegram outbound");
 #endif
+#if CONFIG_APP_CLAW_CAP_IM_MQTT
+    ESP_RETURN_ON_ERROR(claw_event_router_register_outbound_binding("mqtt", "mqtt_send_message"),
+                        TAG, "Failed to bind MQTT outbound");
+#endif
 #if CONFIG_APP_CLAW_CAP_IM_WECHAT
     ESP_RETURN_ON_ERROR(claw_event_router_register_outbound_binding("wechat", "wechat_send_message"),
                         TAG, "Failed to bind WeChat outbound");

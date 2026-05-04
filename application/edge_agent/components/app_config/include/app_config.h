@@ -34,6 +34,11 @@ typedef struct {
     char feishu_app_id[64];
     char feishu_app_secret[APP_CONFIG_STR_LEN];
     char tg_bot_token[APP_CONFIG_STR_LEN];
+    char mqtt_broker_url[APP_CONFIG_STR_LEN];
+    char mqtt_username[32];
+    char mqtt_password[APP_CONFIG_STR_LEN];
+    char mqtt_device_id[32];
+    char mqtt_topic_prefix[32];
     char wechat_token[APP_CONFIG_STR_LEN];
     char wechat_base_url[APP_CONFIG_STR_LEN];
     char wechat_cdn_base_url[APP_CONFIG_STR_LEN];

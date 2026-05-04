@@ -133,5 +133,34 @@
         }
       }
     ]
+  },
+  {
+    "id": "hydro_leak_emergency",
+    "description": "Leak detected — close valve and water pump, alert via IM.",
+    "enabled": true,
+    "consume_on_match": true,
+    "ack": "leak emergency handled",
+    "match": {
+      "source_cap": "cap_lua",
+      "event_type": "custom",
+      "event_key": "hydro_leak",
+      "content_type": "text"
+    },
+    "actions": [
+      {
+        "type": "run_script",
+        "input": {
+          "path": "scripts/hydro_controls.lua",
+          "args": "emergency_stop"
+        }
+      },
+      {
+        "type": "send_message",
+        "input": {
+          "channel": "telegram",
+          "message": "ALERT: Water leak detected! Valve closed, pump stopped."
+        }
+      }
+    ]
   }
 ]

@@ -23,6 +23,9 @@
 #if CONFIG_APP_CLAW_CAP_IM_TG
 #include "cap_im_tg.h"
 #endif
+#if CONFIG_APP_CLAW_CAP_IM_MQTT
+#include "cap_im_mqtt.h"
+#endif
 #if CONFIG_APP_CLAW_CAP_IM_WECHAT
 #include "cap_im_wechat.h"
 #endif
@@ -332,6 +335,33 @@ static esp_err_t app_cap_register_im_tg(const app_claw_config_t *config,
 }
 #endif
 
+#if CONFIG_APP_CLAW_CAP_IM_MQTT
+static esp_err_t app_cap_prepare_im_mqtt(const app_claw_config_t *config,
+                                          const app_claw_storage_paths_t *paths)
+{
+    if (config->mqtt_broker_url[0] && config->mqtt_device_id[0]) {
+        ESP_RETURN_ON_ERROR(cap_im_mqtt_set_config(&(cap_im_mqtt_config_t) {
+                                .broker_url = config->mqtt_broker_url,
+                                .username = config->mqtt_username,
+                                .password = config->mqtt_password,
+                                .device_id = config->mqtt_device_id,
+                                .topic_prefix = config->mqtt_topic_prefix,
+                            }),
+                            TAG, "Failed to set MQTT config");
+    }
+
+    return ESP_OK;
+}
+
+static esp_err_t app_cap_register_im_mqtt(const app_claw_config_t *config,
+                                           const app_claw_storage_paths_t *paths)
+{
+    (void)config;
+    (void)paths;
+    return cap_im_mqtt_register_group();
+}
+#endif
+
 #if CONFIG_APP_CLAW_CAP_IM_WECHAT
 static esp_err_t app_cap_prepare_im_wechat(const app_claw_config_t *config,
                                            const app_claw_storage_paths_t *paths)
@@ -543,6 +573,9 @@ static const app_capability_group_entry_t s_capability_group_entries[] = {
 #if CONFIG_APP_CLAW_CAP_IM_TG
     { "cap_im_tg", "Telegram", "Register Telegram cap", false, app_cap_prepare_im_tg, app_cap_register_im_tg },
 #endif
+#if CONFIG_APP_CLAW_CAP_IM_MQTT
+    { "cap_im_mqtt", "MQTT", "Register MQTT cap", false, app_cap_prepare_im_mqtt, app_cap_register_im_mqtt },
+#endif
 #if CONFIG_APP_CLAW_CAP_IM_WECHAT
     { "cap_im_wechat", "WeChat", "Register WeChat cap", false, app_cap_prepare_im_wechat, app_cap_register_im_wechat },
 #endif
@@ -599,6 +632,9 @@ static const app_capability_group_info_t s_capability_group_infos[] = {
 #endif
 #if CONFIG_APP_CLAW_CAP_IM_TG
     { "cap_im_tg", "Telegram", false },
+#endif
+#if CONFIG_APP_CLAW_CAP_IM_MQTT
+    { "cap_im_mqtt", "MQTT", false },
 #endif
 #if CONFIG_APP_CLAW_CAP_IM_WECHAT
     { "cap_im_wechat", "WeChat", false },

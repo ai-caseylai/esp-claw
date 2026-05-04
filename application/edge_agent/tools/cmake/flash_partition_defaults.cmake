@@ -21,7 +21,8 @@ if(EDGE_AGENT_FLASH_SIZE)
     file(WRITE "${EDGE_AGENT_PARTITION_DEFAULTS}"
         "# Auto-generated from flash size selection. Do not edit.\n"
         "CONFIG_PARTITION_TABLE_CUSTOM=y\n"
-        "CONFIG_PARTITION_TABLE_CUSTOM_FILENAME=\"partitions_${EDGE_AGENT_FLASH_SIZE}.csv\"\n")
+        "CONFIG_PARTITION_TABLE_CUSTOM_FILENAME=\"partitions_${EDGE_AGENT_FLASH_SIZE}.csv\"\n"
+        "CONFIG_ESPTOOLPY_FLASHSIZE_${EDGE_AGENT_FLASH_SIZE}=y\n")
 
     if(SDKCONFIG_DEFAULTS)
         set(SDKCONFIG_DEFAULTS "${SDKCONFIG_DEFAULTS};${EDGE_AGENT_PARTITION_DEFAULTS}")
@@ -29,6 +30,14 @@ if(EDGE_AGENT_FLASH_SIZE)
         set(SDKCONFIG_DEFAULTS "$ENV{SDKCONFIG_DEFAULTS};${EDGE_AGENT_PARTITION_DEFAULTS}")
     else()
         set(SDKCONFIG_DEFAULTS "${CMAKE_SOURCE_DIR}/sdkconfig.defaults;${EDGE_AGENT_PARTITION_DEFAULTS}")
+    endif()
+
+    # Also inject board_manager.defaults so board-specific Kconfig symbols are applied
+    if(EXISTS "${EDGE_AGENT_BOARD_MANAGER_DEFAULTS}")
+        list(FIND SDKCONFIG_DEFAULTS "${EDGE_AGENT_BOARD_MANAGER_DEFAULTS}" _bmgr_idx)
+        if(_bmgr_idx LESS 0)
+            set(SDKCONFIG_DEFAULTS "${SDKCONFIG_DEFAULTS};${EDGE_AGENT_BOARD_MANAGER_DEFAULTS}")
+        endif()
     endif()
 
     message(STATUS "${EDGE_AGENT_PROJECT_LOG_PREFIX} Partition table auto-selected: partitions_${EDGE_AGENT_FLASH_SIZE}.csv")

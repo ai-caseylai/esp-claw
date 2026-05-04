@@ -65,6 +65,13 @@ menu "App Claw Config"
                 Enable the Telegram capability and keep app_claw's direct dependency
                 on cap_im_tg.
 
+        config APP_CLAW_CAP_IM_MQTT
+            bool "Enable MQTT capability"
+            default y
+            help
+                Enable the MQTT capability and keep app_claw's direct dependency
+                on cap_im_mqtt.
+
         config APP_CLAW_CAP_IM_WECHAT
             bool "Enable WeChat capability"
             default y
